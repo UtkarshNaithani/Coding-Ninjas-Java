@@ -1,0 +1,16 @@
+public class solution {
+    public static int binarySearch(int arr[], int si,int en,int x){
+        if(si>en) return -1;
+        int mid=(si+en)/2;
+        if(x==arr[mid]) return mid;
+        else if(x>arr[mid]) return binarySearch(arr,mid+1,en,x);
+        else return binarySearch(arr,si,mid-1,x);
+    }
+
+	
+	public static int binarySearch(int input[], int element) {
+		
+        return binarySearch(input,0,input.length-1,element); 
+			
+	}
+}
