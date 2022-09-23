@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class Solution {	
+
+	public static int pairSum(int[] arr, int num) {
+		//Your code goes here
+        
+        Arrays.sort(arr);
+        
+        int i=0;
+        
+        int e=arr.length-1;
+        
+        int count=0;
+        while(i<e){
+            
+            if(arr[i]+arr[e]<num){
+                i++;
+            }else if(arr[i]+arr[e]>num){
+                e--;
+            }else{
+                //case when all the elements in the array are equal
+                if(arr[i]==arr[e]){
+                    int repeat=e-i+1;
+                    count+=repeat*(repeat-1)/2;
+                    return count;
+                }
+                //case for duplicate numbers
+                int tempi=i+1;
+                int tempe=e-1;
+                
+                while(tempi<=tempe && arr[tempi]==arr[i]){
+                    tempi++;
+                }
+                while(tempi<=tempe && arr[tempe]==arr[e]){
+                    tempe--;
+                }
+                
+                int fromstart=tempi-i;
+                int fromend=e-tempe;
+                
+                count+=fromstart*fromend;
+                
+                i=tempi;
+                e=tempe;
+                
+                
+            }
+            
+        }
+        return count;
+	}
+}

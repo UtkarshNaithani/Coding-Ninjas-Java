@@ -1,0 +1,58 @@
+import java.util.*;
+public class Solution {
+
+    public static int tripletSum(int arr[], int k){
+        Arrays.sort(arr);
+        int n = arr.length;
+        int count = 0;
+        for(int i=0; i<n; i++){
+            int temp = k- arr[i];
+            // finding pairs of temp;
+            count += findPairHelper(arr, i+1, n-1, temp);
+        }
+
+        return count;
+    }
+
+    private static int findPairHelper(int arr[], int sI, int eI, int key){
+        int numPair = 0;
+        while(sI < eI){
+            if(arr[sI] + arr[eI] > key)
+             
+                eI--;
+            else if(arr[sI] + arr[eI] < key)
+           
+                sI++;
+            else if(arr[sI] == arr[eI]){
+               
+                numPair += num*(num-1)/2;
+                return numPair;
+            }
+            else {
+              
+
+                int startElement = arr[sI];
+                int endElement = arr[eI];
+                int tempStartIndex = sI + 1;
+                int tempEndIndex = eI - 1;
+
+                while(tempStartIndex <= tempEndIndex && arr[tempStartIndex] == startElement)
+                    tempStartIndex++;
+
+                while(tempStartIndex <= tempEndIndex && arr[tempEndIndex] == endElement)
+                    tempEndIndex--;
+
+                int totalElementFromStart = tempStartIndex - sI;
+                int totalElementFromEnd = eI - tempEndIndex;
+
+                numPair += (totalElementFromEnd * totalElementFromStart);
+
+                sI = tempStartIndex;
+                eI = tempEndIndex;
+            }
+        }
+
+        return numPair;
+    }
+}
+  
